@@ -6,26 +6,30 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+      <link rel="stylesheet" href="/style/style.css">
       <title>Nikkei auto parts</title>
     </head>
-    <body>
+    <body class="bg-light">
       <div>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="./index.html">Inicio</a>
+          <a class="navbar-brand" href="./index.html"><span class="ion-home pr-3" style="font-size:1.5rem;color:white"></span>Nikkei Auto Parts</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a id="login" class="nav-link" href="./login.html" style="display:none">Iniciar sesion <span class="sr-only">(current)</span></a>
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <!--href="./login.html"-->
+                  <a id="login" class="nav-link" data-toggle="modal" data-target="#login_modal" href="#" style="display:none">Iniciar sesion <span class="sr-only">(current)</span></a>
                 </li>
                   <li class="nav-item">
-                  <a id="signup" class="nav-link" href="./signup.html" style="display:none">Registrate</a>
+                  <a id="register" class="nav-link" data-toggle="modal" data-target="#register_modal" href="" style="display:none">Registrate</a>
                 </li>
                   <li class="nav-item active">
-                    <a id="upload" class="nav-link" href="./upload.html" style="display:none">Agregar producto</a>
+                    <a id="upload" class="nav-link" data-toggle="modal" data-target="upload_modal" href="#" style="display:none">Agregar producto</a>
                 </li>
                 <li class="nav-item active">
                   <a id="cart" class="nav-link" href="./cart.html" style="display:none">Carro de compras</a>
@@ -34,27 +38,78 @@
                   <a id="order" class="nav-link" href="./order.html" style="display:none">Ver ordenes</a>
                 </li>
                 <li class="nav-item active">
-                  <a id="logout" class="nav-link" style="display:none">Cerrar sesion</a>
+                  <a id="logout" class="nav-link" href="#" style="display:none">Cerrar sesion</a>
                 </li>
               </ul>
             </div>
           </nav>
         </nav>
-      </div>      <h1>Ordenes</h1>
-      <table id="table" border="3" style="width: 100%;">
-        <thead>
+      </div>      
+      <div class="container">
+          <div class="row">
+           <h1 id="small_title" class="d-inline  bg-dark text-white responsive-display col"  style="display: none;">Ordenes</h1>
+
+           <h1 class=" display-4 mb-0  d-inline  bg-dark text-white col" id="title" style="display:none;" >Ordenes</h1>
+
+     
+            <!--<div class="col-md-8 offset-md-8"></div>-->
+
+          <div class="col bg-light mr-4 ml-3 mt-3" id="searching" style="display:none;">
+          <h4 class="row ">Busqueda por Apellido:</h4>
+          
+          <div class="row">
+            <div class="input-group mb-3 ">        
+             <input id="value" class="form-control" placeholder="Buscar por apellido" aria-label="Recipient's username" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button id="search" class="btn btn-primary" type="button"><i class='ion-icon ion-android-search  pr-1' style="font-size:16px;color:white"></i>Buscar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <!--<div class="col bg-light" style="padding-left: :20px;">
+              <h4 class="row ">Busqueda por Apellido:</h4>
+                <br>
+                <div class="row">
+               <div class="input-group mb-3" id="searching" style="display:none;">        
+               <input id="value" type="text" class="form-control" placeholder="Buscar por apellido" aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+                <div class="input-group-append">
+                  <button id="search" class="btn btn-primary" type="button"><i class='ion-icon ion-android-search  pr-1' style="font-size:16px;color:white"></i>Buscar</button>
+                </div>
+              </div>
+            </div>
+          </div>-->
+            
+        
+        </div>
+
+
+        
+
+
+
+      <table class="table table-striped table-hover table-responsive-sm" id="table" >
+        <thead  class="bg-dark text-white" >
           <tr id="tr">
           </tr>
         </thead>
-      </table>
-      <div id="searching" style="display:none">
+      </table>     
+      <br>
+
+      <!--<div id="searching" style="display:none">
         <input type="text" id="value" placeholder="Buscar por apellido"/>
         <button id="search">Buscar</button>
+      </div>-->
+
+      
+      
+
       </div>
       <div id="test"/>
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       <script src="./js/XHR.js"></script>
       <script src="./js/check_header.js"></script>
       <script src="./js/check_session.js"></script>

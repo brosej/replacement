@@ -22,7 +22,7 @@ function log(){
            });
        } else {
          $('login').style.display = "block";
-         $('signup').style.display = "block";
+         $('register').style.display = "block";
           }
        });
      };

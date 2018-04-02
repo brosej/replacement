@@ -2,15 +2,126 @@ function $(id) {
     return document.getElementById(id);
 };
 var brand;
+var breakpoint = {};
+var title = $('title')
+var small_title = $('small_title')
+
+breakpoint.refreshValue = function () {
+  this.value = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '');
+  console.log(breakpoint.value)
+};
+
+function responsiveness(){
+  switch(breakpoint.value) {
+              case 'smartphone':
+                title.setAttribute('class', '')
+                title.innerHTML = "";
+                small_title.setAttribute('class', 'display-4 col-4 col-md-4  d-inline  bg-dark text-white responsive-display')
+              break;
+              case 'tablet':
+                title.setAttribute('class', '')
+                title.innerHTML = "";
+                small_title.setAttribute('class', 'display-4 col-4 col-md-4  d-inline  bg-dark text-white responsive-display')
+              break;
+              case 'desktop':
+                small_title.setAttribute('class', '')
+                small_title.innerHTML = "";
+                title.setAttribute('class', ' display-3 col-4 col-md-4 mb-0  d-inline  bg-dark text-white p-2')
+              break;
+              default:
+                small_title.setAttribute('class', '')
+                small_title.innerHTML = "";
+                title.setAttribute('class', ' display-3 col-4 col-md-4 mb-0  d-inline  bg-dark text-white p-2')
+          }
+}
+
+
+  //making your buttons beautiful
+
+  const buyButton = (mybutton)=>{
+    var buy_icon = document.createElement('i');
+    mybutton.setAttribute('class','btn btn-success pl-5 pr-5')
+    buy_icon.setAttribute('class','ion-icon ion-android-cart pl-1')
+    buy_icon.setAttribute('style','font-size:22px;color:white')
+    mybutton.innerHTML ='Añadir al '
+    mybutton.appendChild(buy_icon)
+    return mybutton
+  }
+  const eraseButton = (mybutton)=>{
+    var erase_icon = document.createElement('i');
+    mybutton.setAttribute('class','btn btn-danger pl-5 pr-5')
+    erase_icon.setAttribute('class','ion-icon ion-android-delete pl-1 ml-2')
+    erase_icon.setAttribute('style','font-size:22px;color:white')
+    mybutton.innerHTML = "  Eliminar"
+    mybutton.appendChild(erase_icon)
+    return mybutton
+  }
+ 
+
+  const editButton = (mybutton)=>{
+    var edit_icon = document.createElement('i');
+    mybutton.setAttribute('class','btn btn-primary pl-5 pr-5')
+    edit_icon.setAttribute('class','ion-icon ion-edit pl-1 ml-2')
+    edit_icon.setAttribute('style','font-size:22px;color:white') 
+    mybutton.innerHTML = "  Editar";
+    mybutton.appendChild(edit_icon)
+    return mybutton
+
+  }
+  //bitch
+  
+
+
+
 
 function load_products_by_brands() {
   var xhr = new XHR();
   second_function();
    brand = $('brand').value;
   xhr.post('./product/prices',{brand:brand},{'Content-Type':'application/json'}).then((data)=> {
-    var brand_name = document.createElement('h2');
-    brand_name.innerHTML = brand;
-    $('brand_name').appendChild(brand_name);
+    var br = document.createElement('br')
+    var brand_name = document.createElement('h3');
+   // brand_name.setAttribute('id','this_brand')
+
+
+    switch(breakpoint.value) {
+              case 'smartphone':
+                var brand_name = document.createElement('h3');
+                $('small_search_by').innerHTML = ""
+                brand_name.setAttribute('class', 'd-inline p-2 col')  
+                brand_name.innerHTML = `Marca: ${brand}`;
+                $('small_search_by').appendChild(brand_name);
+              break;
+              case 'tablet':
+                var brand_name = document.createElement('h3');
+                $('small_search_by').innerHTML = ""
+                brand_name.setAttribute('class', 'd-inline p-2 col')  
+                brand_name.innerHTML = `Marca: ${brand}`;
+                $('small_search_by').appendChild(brand_name);
+              break;
+              case 'desktop':
+                var brand_name = document.createElement('h3');
+                $('search_by').innerHTML = ""
+                brand_name.setAttribute('class', 'd-inline bg-dark text-white pb-3 pl-2')  
+                brand_name.innerHTML = `Marca: ${brand}`;
+                $('search_by').appendChild(brand_name);
+
+              break;
+              default:
+                var brand_name = document.createElement('h3');
+                $('search_by').innerHTML = ""
+                brand_name.setAttribute('class', 'd-inline bg-dark text-white pb-3 p-2')  
+                brand_name.innerHTML = `Marca: ${brand}`;
+                $('search_by').appendChild(brand_name);
+          }
+
+
+    /*$('search_by').innerHTML = ""
+    brand_name.setAttribute('class', 'd-inline p-2 bg-dark text-white')  
+    brand_name.innerHTML = `Marca: ${brand}`;
+    $('search_by').appendChild(brand_name);  */
+
+
     $('tr').innerHTML = "";
     if ($('tbdy') != null) {
       $('tbdy').remove();
@@ -22,9 +133,10 @@ function load_products_by_brands() {
       console.log("a");
         for (var i=0; i < 5; i++) {
             var tr = $('table').tHead.children[0], th = document.createElement('th');
+            th.setAttribute('scope','col')
             switch(i) {
               case 0:
-                th.innerHTML = 'Codigo';
+               th.innerHTML = 'Codigo';
               break;
               case 1:
                 th.innerHTML = 'Descripcion';
@@ -81,11 +193,18 @@ function load_products_by_brands() {
               }
               break;
               case 4:
-                var button = document.createElement('button');
+                //var add_button = document.createElement('button');
+               // var buy_icon = document.createElement('i');
+                //add_button.setAttribute('class','btn btn-success pl-5 pr-5')
+               // buy_icon.setAttribute('class','ion-icon ion-android-cart pl-1')
+               // buy_icon.setAttribute('style','font-size:22px;color:white')
+                var add_button1 = document.createElement('button');
+                add_button1 = buyButton(add_button1)
                 var product_id = data.list[i].id;
                 td.setAttribute("id", i)
-                button.innerHTML = "Anadir";
-                td.appendChild(button);
+                //add_button.innerHTML ='Añadir al '
+                //add_button.appendChild(buy_icon)
+                td.appendChild(add_button1);
                 td.addEventListener('click', function() {
                   var quantity = prompt("Cantidad a comprar: ");
                   var reg = /^\d+$/;
@@ -187,11 +306,12 @@ function load_products_by_brands() {
                 }
                 break;
                 case 4:
-                  var button = document.createElement('button');
+                  var add_button2 = document.createElement('button');
+                  add_button2 = buyButton(add_button2);
                   var product_id = data.list[i].id;
                   td.setAttribute("id", i)
-                  button.innerHTML = "Anadir";
-                  td.appendChild(button);
+                  //button.innerHTML = "Anadir";
+                  td.appendChild(add_button2);
                   td.addEventListener('click', function() {
                     var quantity = prompt("Cantidad a comprar: ");
                     var reg = /^\d+$/;
@@ -219,10 +339,11 @@ function load_products_by_brands() {
                 });
                 break;
                 case 5:
-                  var button = document.createElement('button');
+                  var erase_button1 = document.createElement('button');
+                  erase_button1 = eraseButton(erase_button1);
                   td.setAttribute("id", i)
-                  button.innerHTML = "Eliminar";
-                  td.appendChild(button);
+                  //button.innerHTML = "Eliminar";
+                  td.appendChild(erase_button1);
                   var product_id = data.list[i].id;
                   td.addEventListener('click', function() {
                       var r = confirm("Segur@ que desea eliminar esta orden?")
@@ -235,10 +356,11 @@ function load_products_by_brands() {
                   });
                 break;
                 case 6:
-                  var button = document.createElement('button');
+                  var edit_button1 = document.createElement('button');
+                  edit_button1 = editButton(edit_button1);
                   td.setAttribute("id", i)
-                  button.innerHTML = "Editar";
-                  td.appendChild(button);
+                  //button.innerHTML = "Editar";
+                  td.appendChild(edit_button1);
                   td.addEventListener('click', function() {
                     select();
                     $('edit').style.display = "block";
@@ -370,10 +492,51 @@ function load_products_by_brands() {
         if($('this') !== null) {
           $('this').remove();
         }
-        var department_name = document.createElement('h2');
+
+
+        switch(breakpoint.value) {
+              case 'smartphone':
+                var department_name = document.createElement('h3');     
+                department_name.setAttribute('id', 'this');
+                department_name.innerHTML = `Departamento: ${department}`;
+                department_name.setAttribute('class', 'd-inline p-2 col');
+                $('small_search_by').appendChild(department_name);
+              break;
+              case 'tablet':
+                var department_name = document.createElement('h3');   
+                department_name.setAttribute('id', 'this');
+                department_name.innerHTML = `Departamento: ${department}`;
+                department_name.setAttribute('class', 'd-inline p-2 col');
+                $('small_search_by').appendChild(department_name);
+              break;
+              case 'desktop':
+                var department_name = document.createElement('h3');       
+                department_name.setAttribute('id', 'this');
+                department_name.innerHTML = `- Departamento: ${department}`;
+                department_name.setAttribute('class', 'd-inline  bg-dark text-white pb-3 pl-2 pr-2 ');
+                $('search_by').appendChild(department_name);
+
+              break;
+              default:
+                var department_name = document.createElement('h3');       
+                department_name.setAttribute('id', 'this');
+                department_name.innerHTML = `- Departamento: ${department}`;
+                department_name.setAttribute('class', 'd-inline  bg-dark text-white pb-3 pl-2 pr-2');
+                $('search_by').appendChild(department_name);
+          }
+        /*var department_name = document.createElement('h3');       
         department_name.setAttribute('id', 'this');
-        department_name.innerHTML = department;
-        $('brand_name').appendChild(department_name);
+        department_name.innerHTML = `- Departamento: ${department}`;
+        department_name.setAttribute('class', 'd-inline p-2 bg-dark text-white');
+        $('search_by').appendChild(department_name);
+
+        var department_name = document.createElement('h3');
+        department_name.setAttribute('class', 'row')     
+        department_name.setAttribute('id', 'this');
+        department_name.innerHTML = `- Departamento: ${department}`;
+        department_name.setAttribute('class', 'd-inline p-2 bg-dark text-white');
+        $('small_search_by').appendChild(department_name);*/
+       
         $('tr').innerHTML = "";
         if ($('tbdy') != null) {
           $('tbdy').remove();
@@ -443,11 +606,18 @@ function load_products_by_brands() {
                   }
                   break;
                   case 4:
-                    var button = document.createElement('button');
+                    var add_button3 = document.createElement('button');
+                    add_button3 = buyButton(add_button3);
+
                     var product_id = data.list[i].id;
                     td.setAttribute("id", i)
-                    button.innerHTML = "Anadir";
-                    td.appendChild(button);
+                    //button.innerHTML = "Anadir al ";
+                    //let buy_icon = document.createElement('i');
+                    //button.setAttribute('class','btn btn-success pl-5 pr-5')
+                   // buy_icon.setAttribute('class','ion-icon ion-android-cart pl-1')
+                   // buy_icon.setAttribute('style','font-size:22px;color:white')
+                    //button.appendChild(buy_icon)
+                    td.appendChild(add_button3);
                     td.addEventListener('click', function() {
                       var quantity = prompt("Cantidad a comprar: ");
                       var reg = /^\d+$/;
@@ -549,11 +719,18 @@ function load_products_by_brands() {
                     }
                     break;
                     case 4:
-                      var button = document.createElement('button');
+
+                       var add_button4 = document.createElement('button');
+                       add_button4 = buyButton(add_button4);
+                      //var buy_icon = document.createElement('i');
+                      //button.setAttribute('class','btn btn-success pl-5 pr-5')
+                      //buy_icon.setAttribute('class','ion-icon ion-android-cart pl-1')
+                      //buy_icon.setAttribute('style','font-size:22px;color:white')
                       var product_id = data.list[i].id;
                       td.setAttribute("id", i)
-                      button.innerHTML = "Anadir";
-                      td.appendChild(button);
+                      //button.innerHTML = "Anadir al ";
+                      //button.appendChild(buy_icon)
+                      td.appendChild(add_button4);
                       td.addEventListener('click', function() {
                         var quantity = prompt("Cantidad a comprar: ");
                         var reg = /^\d+$/;
@@ -581,10 +758,15 @@ function load_products_by_brands() {
                     });
                     break;
                     case 5:
-                      var button = document.createElement('button');
+                       var erase_button3 = document.createElement('button');
+                       erase_button3 = eraseButton(erase_button3);
+                      //var erase_icon = document.createElement('i');
+                      //button.setAttribute('class','btn btn-danger pl-5 pr-5')
+                      //erase_icon.setAttribute('class','ion-icon ion-android-delete pl-1')
+                      //erase_icon.setAttribute('style','font-size:22px;color:white')
                       td.setAttribute("id", i)
-                      button.innerHTML = "Eliminar";
-                      td.appendChild(button);
+                      //button.innerHTML = " Eliminar";
+                      td.appendChild(erase_button3);
                       var product_id = data.list[i].id;
                       td.addEventListener('click', function() {
                           var r = confirm("Segur@ que desea eliminar esta orden?")
@@ -597,10 +779,15 @@ function load_products_by_brands() {
                       });
                     break;
                     case 6:
-                      var button = document.createElement('button');
+                      var edit_button3 = document.createElement('button');
+                      edit_button3 = editButton(edit_button3)
+                      //var edit_icon = document.createElement('i');
+                      //button.setAttribute('class','btn btn-primary pl-5 pr-5')
+                      //erase_icon.setAttribute('class','ion-icon ion-android-edit pl-1')
+                      //erase_icon.setAttribute('style','font-size:22px;color:white')
                       td.setAttribute("id", i)
-                      button.innerHTML = "Editar";
-                      td.appendChild(button);
+                      //button.innerHTML = " Editar";
+                      td.appendChild(edit_button3);
                       td.addEventListener('click', function() {
                         select();
                         $('edit').style.display = "block";
@@ -762,20 +949,28 @@ function select() {
 
 function second_function() {
   let xhr = new XHR();
-  $('department').style.display = 'block';
+  //$('department_input_group').style.display = 'block';
+  $('department_div').style.display = 'block';
+  $('department_h4').style.display = 'block';
   $('show2').style.display = 'block';
-  $('show').style.display = 'none';
-  $('brand').style.display = 'none';
+  //$('brand_input_group').style.display = 'none';
+  //$('show').style.display = 'none';
+  //$('brand').style.display = 'none';
   xhr.get('./stuff/get_brands_and_departments',{},{}).then((data)=> {
+    $('department').innerHTML="";
     for (var i=0; i<data.departments.length; i++) {
-      var department = document.createElement("option");
-      department.value = data.departments[i].name;
-      department.innerHTML = data.departments[i].name;
-      $('department').appendChild(department);
-
+      var department_option = document.createElement("option");
+      department_option.value = data.departments[i].name;
+      department_option.innerHTML = data.departments[i].name;
+      $('department').appendChild(department_option);
     }
+    
   });
 }
+
+//making things beautiful:
+breakpoint.refreshValue()
+responsiveness()
 
 $('show').addEventListener('click', load_products_by_brands)
 $('show2').addEventListener('click', load_products_by_departments)

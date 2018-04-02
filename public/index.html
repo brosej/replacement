@@ -6,26 +6,31 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+      <link rel="stylesheet" href="/style/style.css">
+
       <title>Nikkei auto parts</title>
     </head>
-    <body>
+    <body class="bg-light">
       <div>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="./index.html">Inicio</a>
+          <a class="navbar-brand" href="./index.html"><span class="ion-home pr-3" style="font-size:1.5rem;color:white"></span>Nikkei Auto Parts</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a id="login" class="nav-link" href="./login.html" style="display:none">Iniciar sesion <span class="sr-only">(current)</span></a>
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <!--href="./login.html"-->
+                  <a id="login" class="nav-link" data-toggle="modal" data-target="#login_modal" href="#" style="display:none">Iniciar sesion <span class="sr-only">(current)</span></a>
                 </li>
                   <li class="nav-item">
-                  <a id="signup" class="nav-link" href="./signup.html" style="display:none">Registrate</a>
+                  <a id="register" class="nav-link" data-toggle="modal" data-target="#register_modal" href="" style="display:none">Registrate</a>
                 </li>
                   <li class="nav-item active">
-                    <a id="upload" class="nav-link" href="./upload.html" style="display:none">Agregar producto</a>
+                    <a id="upload" class="nav-link" data-toggle="modal" data-target="#upload_modal" href="#" style="display:none">Agregar producto</a>
                 </li>
                 <li class="nav-item active">
                   <a id="cart" class="nav-link" href="./cart.html" style="display:none">Carro de compras</a>
@@ -33,26 +38,82 @@
                 <li class="nav-item active">
                   <a id="order" class="nav-link" href="./order.html" style="display:none">Ver ordenes</a>
                 </li>
+                
                 <li class="nav-item active">
-                  <a id="logout" class="nav-link" style="display:none">Cerrar sesion</a>
+                  <a id="logout" class="nav-link" href="#" style="display:none">Cerrar sesion</a>
                 </li>
+              
               </ul>
+              
             </div>
           </nav>
         </nav>
       </div>
-      <h1><div id='title'>Productos</div></h1>
-      <div id='brand_name'></div>
-      <table id="table" border="3" style="width: 100%;">
-        <thead>
+      <div class="container">
+
+      <h1 id="small_title" class="col-4 col-md-4  d-inline  bg-dark text-white responsive-display"  style="display: none;">Productos</h1>
+      
+      <div class="row" style="margin:0;"> 
+        
+        <!-- TITLE DISPLAY -->
+        <h1 class=" display-4 col-4 col-md-4 mb-0  d-inline  bg-dark text-white" id="title" style="display:none;" >Productos</h1>
+
+        <div class="col bg-light ml-3 mt-1" style="padding-left: :20px;">
+          <h4 class="row ">Busqueda por Marca:</h4>
+          
+          <div class="row">
+            <div class="input-group " id="brand_input_group">        
+             <select id="brand" class="custom-select"></select>
+              <div class="input-group-append">
+                <button id="show" class="btn btn-primary" type="button"><i class='ion-icon ion-android-search  pr-1' style="font-size:16px;color:white"></i>Buscar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col bg-light mt-1" style="padding-left:20px;" >
+          <h4 class="row ml-1" id="department_h4" style="display: none;">Busqueda por Departamento:</h4>
+          
+          <div  class="row" id="department_div" style="display: none; margin:0;"> 
+            <div class="row" style="margin:0;">
+              <select class="custom-select col-12 col-md-9" id="department"></select>
+              <button id="show2" class="btn btn-primary col-6 col-md-3" type="button" style="display: none;"><i class='ion-icon ion-android-search pr-1' style="font-size:16px;color:white"></i>Buscar</button>
+            </div>    
+          </div>
+        </div>
+
+      </div>
+
+      <div id="search_by">
+        <h3 id='brand_name'></h3>     
+        <h3 id='department_name'></h3>
+      </div>
+
+      <div id="small_search_by" class="row">
+        <h3 id='brand_name' class="col"></h3>     
+        <h3 id='department_name' class="col"></h3>
+      </div>
+
+      <table class="table table-striped table-hover table-responsive-sm" id="table" >
+        <thead  class="bg-dark text-white" >
           <tr id="tr">
           </tr>
         </thead>
-      </table>
-      <select id="brand"></select>
-      <button id="show">Buscar</button>
-      <select id="department" style="display: none;"></select>
-      <button id="show2" style="display: none;">Buscar</button>
+      </table>     
+      <br>
+
+
+     <!--<select id="brand"></select> 
+      <button id="show">Buscar</button>-->
+      
+
+     <!-- <div style="display: none;" class="input-group" id="department_input_group">
+        
+      </div>-->
+
+      <!--<select id="department" style="display: none;"></select>
+      <button id="show2" style="display: none;">Buscar</button>-->
+      
       <div id="edit" style="display: none;" class="login-page">
         <div class="login-form">
           <div class="form">
@@ -83,12 +144,197 @@
          </div>
        </div>
 
+      </div>
+
+      <!-- LOG IN MODAL -->
+      <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="login_modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content  text-white">
+            <div class="modal-header bg-dark">
+              <h5 class="modal-title text-white" id="exampleModalLongTitle">Inicio de Sesión</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" id="close_id_modal">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body bg-dark  ">
+
+              <span class="pb-2">Correo:</span><br>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                </div>
+                <input  id="email" type="text" class="form-control" placeholder="correo electronico" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <span class="pb-2">Contraseña:</span><br>
+              <input id="password" type="password" class="form-control" placeholder="contrasena"/><br>
+              <p class="message text-left">No estas registrado? <a href="#" onclick="triggerRegister()">Crear una cuenta</a></p>
+            </div>
+
+            <div class="modal-footer  bg-dark">
+          
+                  <div class="row">
+                    <button type="button" class="btn btn-secondary mr-2 ml-2" data-dismiss="modal" id="close_login">Cancelar</button>
+                    <button type="button" id="login" onclick="session()" class="btn btn-primary mr-4 ml-2" >Ingresar</button>
+                  </div>                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- REGISTER MODAL -->
+      <div class="modal fade" id="register_modal" tabindex="-1" role="dialog" aria-labelledby="register_modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content  text-white">
+            <div class="modal-header bg-dark">
+              <h5 class="modal-title text-white" id="exampleModalLongTitle">Regístro</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" id="close_register_modal">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body bg-dark  ">
+
+              <span class="pb-2">Nombre:</span><br>
+
+              <input id="name" type="text" class="form-control" placeholder="Tu nombre"/><br>
+
+              <span class="pb-2">Apellido:</span><br>
+
+              <input id="lastname" type="text" class="form-control" placeholder="Tu apellido"/><br>
+
+              <span class="pb-2">Dirección:</span><br>
+
+              <input id="zone" type="text" class="form-control" placeholder="Tu dirección"/><br>
+
+              <span class="pb-2">Correo:</span><br>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                </div>
+                <input  id="new_email" type="text" class="form-control" placeholder="Correo electronico" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+
+              <span class="pb-2">Contraseña:</span><br>
+
+              <input id="new_password" type="password" class="form-control" placeholder="Contrasena"/><br>
+              <p class="message text-right">Olvidaste tu Contraseña? <a href="">A mis cojooones! ajajaj bec</a></p>
+
+            </div>
+
+            <div class="modal-footer  bg-dark">
+          
+                  <div class="row">
+                    <button type="button" class="btn btn-secondary mr-2 ml-2" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="login" onclick="new_account()" class="btn btn-success mr-4 ml-2" >Crear</button>
+                  </div>                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--ANY MESSAGE MODAL-->
+      <div class="modal fade" id="message_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="message_modal_title"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" onclick="">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="message_modal_body">
+                         </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_message_modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" id="message_modal_button"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--UPLOAD MODAL-->
+      <div class="modal fade" id="upload_modal" tabindex="-1" role="dialog" aria-labelledby="upload_modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content  text-white">
+            <div class="modal-header bg-dark">
+              <h5 class="modal-title text-white" id="exampleModalLongTitle">Nuevo producto</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" id="close_register_modal">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body bg-dark  ">
+
+              <span class="pb-2">Codigo:</span><br>
+
+              <input id="code" type="text" class="form-control" placeholder="codigo de producto"/><br>
+
+              <span class="pb-2">Precio:</span><br>
+
+              <input id="precio" type="number" class="form-control" placeholder="precio de producto"/><br>
+
+              <span class="pb-2">Descripción:</span><br>
+
+              <input id="description" type="text" class="form-control" placeholder="descripción de producto"/><br>
+
+              <span class="pb-2">Existencía:</span><br>
+
+              <input id="stock" type="number" class="form-control" placeholder="existencia de producto"/><br>
+
+              <span class="pb-2">Puede ser facturado con existencia 0?</span>
+
+              <select class="custom-select" id="type_supplier">
+                <option value=true>Si</option>
+                <option value=false>No</option>
+              </select><br>
+
+              <span class="pb-2">Marca:</span>
+              <select class="custom-select" id="brand_select"></select><br>
+
+              <span class="pb-2">Departamento:</span>
+              <select class="custom-select" id="department_select"></select><br>
+
+            </div>
+
+            <div class="modal-footer  bg-dark">
+          
+                  <div class="row">
+                    <button type="button" class="col btn btn-secondary  m-2" data-dismiss="modal" id="close_upload_modal">Cancelar</button>
+                    <button type="button" id="show_stuff_btn" onclick="" class="col btn btn-secondary m-2" >Mostrar marcas y dptos</button>
+                    <button type="button" id="add_stuff_btn" onclick="" class="col btn btn-primary m-2" >Añadir nueva marca o dpto</button>
+                    <button type="button" id="sendFile" onclick="" class="col btn btn-success m-2" >Añadir producto</button>
+                  </div>                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--<div id="stuff" style="display: none;">
+        <h1>Agregar marca y/o departamento</h1>
+          <div class="login-page">
+             <div class="login-form">
+               <div id="add_btn" class="form">
+                  <input id="brand" type="text" placeholder="marca"></input>
+                  <input id="department" type="text" placeholder="departamento"></input>
+                </div>
+              </div>
+            </div>
+        </div>-->
+
+     <span data-toggle="modal" data-target="#message_modal" id="trigger_message_modal"></span>
+    
+
        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
        <script src="./js/XHR.js"></script>
        <script src="./js/check_header.js"></script>
        <script src="./js/select.js"></script>
+       <script src="./js/request.js"></script>
+       <script src="./js/signup.js"></script>
+       <script src="./js/load.js"></script>
        <script src="./js/start.js"></script>
   </body>
 </html>

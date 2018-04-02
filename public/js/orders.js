@@ -2,14 +2,45 @@ function $(id) {
     return document.getElementById(id);
 };
 
+var breakpoint = {};
+var title = $('title')
+var small_title = $('small_title')
+
+breakpoint.refreshValue = function () {
+  this.value = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '');
+  console.log(breakpoint.value)
+};
+
+function responsiveness(){
+  switch(breakpoint.value) {
+              case 'smartphone':
+                title.setAttribute('class', '')
+                title.innerHTML = "";
+                small_title.setAttribute('class', 'display-4 col-4 col-md-4  d-inline  bg-dark text-white responsive-display')
+              break;
+              case 'tablet':
+                title.setAttribute('class', '')
+                title.innerHTML = "";
+                small_title.setAttribute('class', 'display-4 col-4 col-md-4  d-inline  bg-dark text-white responsive-display')
+              break;
+              case 'desktop':
+                small_title.setAttribute('class', '')
+                small_title.innerHTML = "";
+                title.setAttribute('class', ' display-3 col-4 col-md-4 mb-0 ml-3  d-inline  bg-dark text-white ')
+              break;
+              default:
+                small_title.setAttribute('class', '')
+                small_title.innerHTML = "";
+                title.setAttribute('class', ' display-3 col-4 col-md-4 mb-0 ml-3  d-inline  bg-dark text-white ')
+          }
+}
+
 function show_all_orders() {
   let xhr = new XHR();
   xhr.get('./order/all',{},{}).then((data)=> {
     $('searching').style.display = "block";
     var tbl = $('table');
     tbl.setAttribute("id", "table");
-    tbl.style.width = '100%';
-    tbl.setAttribute("border", "3");
     var tbdy = document.createElement('tbody');
     tbdy.setAttribute('id', 'tbdy')
     for (var i=0; i < 8; i++) {
@@ -130,8 +161,6 @@ function show_specific_orders() {
   xhr.post('./order/tag_search',{value:value},{'Content-Type':'application/json'}).then((data)=> {
     var tbl = $('table');
     tbl.setAttribute("id", "table");
-    tbl.style.width = '100%';
-    tbl.setAttribute("border", "3");
     var tbdy = document.createElement('tbody');
     tbdy.setAttribute('id', 'tbdy')
     for (var i = 0; i < data.orders.length; i++) {
@@ -216,8 +245,6 @@ function show_user_orders(id) {
   xhr.get(`./order/user/${id}`,{},{}).then((data)=> {
     var tbl = $('table');
     tbl.setAttribute("id", "table");
-    tbl.style.width = '100%';
-    tbl.setAttribute("border", "3");
     var tbdy = document.createElement('tbody');
     tbdy.setAttribute('id', 'tbdy')
     for (var i=0; i < 8; i++) {
@@ -582,5 +609,9 @@ function check_admin() {
     }
   });
 }
+
+//making things beautiful:
+breakpoint.refreshValue()
+responsiveness()
 
 addEventListener('load', check_admin);

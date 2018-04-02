@@ -20,4 +20,4 @@ function session(){
     });
 };
 
-$('login').addEventListener('click', session);
+//$('login').addEventListener('click', session);
