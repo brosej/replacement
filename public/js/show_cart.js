@@ -50,7 +50,7 @@ const sendCartButton = (mybutton)=>{
 
 function cart() {
 
-  
+
   console.log('idk man')
   var xhr = new XHR();
   $('tr').innerHTML = "";
@@ -59,7 +59,7 @@ function cart() {
     $('tbdy').remove();
   }
 
-  
+
   //send_cart.setAttribute('id','send_cart')
 
   xhr.get('./cart/product',{},{}).then((data)=> {
@@ -67,7 +67,7 @@ function cart() {
     var tbl = $('table');
     var tbdy = document.createElement('tbody');
     tbdy.setAttribute('id', 'tbdy')
-    
+
 
     for (var i=0; i < 6; i++) {
         var tr = $('table').tHead.children[0], th = document.createElement('th');
@@ -85,7 +85,7 @@ function cart() {
             th.innerHTML = 'Total';
           break;
           case 4:
-            th.innerHTML = 'Eliminar producto de carro de compras'; 
+            th.innerHTML = 'Eliminar producto de carro de compras';
           break;
           case 5:
             th.appendChild($('send_cart'));
@@ -138,20 +138,16 @@ function cart() {
                 alert("Has eliminado un producto del carro de compras!");
                 window.location.href = "./cart.html";
                 })
-               break; 
               })
-            
+              break;
             }
-            console.log(td)
             tr.appendChild(td)
           }
-         console.log(tr)
-        tbdy.appendChild(tr); 
+        tbdy.appendChild(tr);
         }
-       console.log(tbdy)
-    tbl.appendChild(tbdy); 
-    
-    
+    tbl.appendChild(tbdy);
+
+
 
   var total = 0;
   for (var i=0; i<data.list.length; i++) {
@@ -184,10 +180,9 @@ function cart() {
 }
 
 send_cart.addEventListener('click', function() {
-      xhr.post('./order/send_email',{user_name:user_name, user_lastname:user_lastname, 
+      xhr.post('./order/send_email',{user_name:user_name, user_lastname:user_lastname,
         products_name:arr_names, total:total, quantity:arr_quantity,
         price:arr_price, user_id:user_id, product_id:arr_id},{'Content-Type':'application/json'}).then((data) => {
-        console.log(data);
         if (data.sent === true) {
           alert("Pedido enviado")
         } else {
@@ -196,9 +191,9 @@ send_cart.addEventListener('click', function() {
       })
 
   })
-  
 
-  
+
+
 
 
 
@@ -209,4 +204,3 @@ breakpoint.refreshValue()
 responsiveness()
 //addEventListener('load', cart);
 cart()
-

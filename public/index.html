@@ -47,18 +47,17 @@
               
             </div>
           </nav>
-        </nav>
+        <!--</nav>-->
       </div>
       <div class="container">
 
-      <h1 id="small_title" class="col-4 col-md-4  d-inline  bg-dark text-white responsive-display"  style="display: none;">Productos</h1>
-      
+      <!-- TITLE DISPLAY -->
+        <h1 class=" display-3 col-4 col-md-4 mb-0  d-inline  bg-dark text-white responsive-display" id="title" style="display:none;" >Productos</h1>
+
       <div class="row" style="margin:0;"> 
         
-        <!-- TITLE DISPLAY -->
-        <h1 class=" display-4 col-4 col-md-4 mb-0  d-inline  bg-dark text-white" id="title" style="display:none;" >Productos</h1>
 
-        <div class="col bg-light ml-3 mt-1" style="padding-left: :20px;">
+        <div class="col bg-light" style="padding-left: :20px;">
           <h4 class="row ">Busqueda por Marca:</h4>
           
           <div class="row">
@@ -71,7 +70,7 @@
           </div>
         </div>
 
-        <div class="col bg-light mt-1" style="padding-left:20px;" >
+        <div class="col bg-light" style="padding-left:20px;" >
           <h4 class="row ml-1" id="department_h4" style="display: none;">Busqueda por Departamento:</h4>
           
           <div  class="row" id="department_div" style="display: none; margin:0;"> 
@@ -89,10 +88,6 @@
         <h3 id='department_name'></h3>
       </div>
 
-      <div id="small_search_by" class="row">
-        <h3 id='brand_name' class="col"></h3>     
-        <h3 id='department_name' class="col"></h3>
-      </div>
 
       <table class="table table-striped table-hover table-responsive-sm" id="table" >
         <thead  class="bg-dark text-white" >
@@ -101,48 +96,8 @@
         </thead>
       </table>     
       <br>
-
-
-     <!--<select id="brand"></select> 
-      <button id="show">Buscar</button>-->
       
-
-     <!-- <div style="display: none;" class="input-group" id="department_input_group">
         
-      </div>-->
-
-      <!--<select id="department" style="display: none;"></select>
-      <button id="show2" style="display: none;">Buscar</button>-->
-      
-      <div id="edit" style="display: none;" class="login-page">
-        <div class="login-form">
-          <div class="form">
-            <p>Codigo</p>
-            <input id="code" type="text" placeholder="codigo producto"></input>
-            <p>Precio</p>
-            <input id="precio" type="number" placeholder="precio"></input>
-            <p>Descripcion</p>
-            <input id="description" type="text" placeholder="descripcion"></input>
-            <p>Existencia</p>
-            <input id="stock" type="number" placeholder="existencia"></input>
-            <p>Puede ser facturado con existencia 0?<p>
-            <select id="type_supplier">
-              <option value=true>Si</option>
-              <option value=false>No</option>
-              <option value="nothing" selected> No editar </option>
-            </select>
-            <p>Marca</p>
-            <select id="brands">
-              <option value="not" selected> No editar </option>
-            </select>
-            <p>Departamento</p>
-            <select id="departments">
-              <option value="not_two" selected> No editar </option>
-            </select>
-            <button id="update">editar producto</button>
-           </div>
-         </div>
-       </div>
 
       </div>
 
@@ -237,15 +192,23 @@
       <!--ANY MESSAGE MODAL-->
       <div class="modal fade" id="message_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
+          <div class="modal-content bg-dark text-white">
             <div class="modal-header">
               <h5 class="modal-title" id="message_modal_title"></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" onclick="">&times;</span>
               </button>
             </div>
-            <div class="modal-body" id="message_modal_body">
-                         </div>
+            <div class="modal-body bg-light text-dark" id="message_modal_body">
+
+             <!-- <table class="table table-striped table-hover table-responsive-sm mb-0" id="stuff_table" >
+                <thead  class="bg-dark text-white" >
+                  <tr id="stuff_tr">
+                  </tr>
+                </thead>
+              </table>   -->
+
+             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_message_modal">Cerrar</button>
               <button type="button" class="btn btn-primary" id="message_modal_button"></button>
@@ -264,7 +227,7 @@
                 <span aria-hidden="true" id="close_register_modal">&times;</span>
               </button>
             </div>
-            <div class="modal-body bg-dark  ">
+            <div id="upload_modal_body" class="modal-body bg-light text-dark  ">
 
               <span class="pb-2">Codigo:</span><br>
 
@@ -272,7 +235,7 @@
 
               <span class="pb-2">Precio:</span><br>
 
-              <input id="precio" type="number" class="form-control" placeholder="precio de producto"/><br>
+              <input id="precio" type="text" class="form-control" placeholder="precio de producto"/><br>
 
               <span class="pb-2">Descripción:</span><br>
 
@@ -310,7 +273,7 @@
           </div>
         </div>
       </div>
-
+    
       <!--<div id="stuff" style="display: none;">
         <h1>Agregar marca y/o departamento</h1>
           <div class="login-page">
