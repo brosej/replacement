@@ -26,14 +26,15 @@ function responsiveness(){
               case 'desktop':
                 small_title.setAttribute('class', '')
                 small_title.innerHTML = "";
-                title.setAttribute('class', ' display-3 col-4 col-md-4 mb-0 ml-3  d-inline  bg-dark text-white ')
+                title.setAttribute('class', ' display-3 col-4 col-md-4 mb-0  d-inline  bg-dark text-white ')
               break;
               default:
                 small_title.setAttribute('class', '')
                 small_title.innerHTML = "";
-                title.setAttribute('class', ' display-3 col-4 col-md-4 mb-0 ml-3  d-inline  bg-dark text-white ')
+                title.setAttribute('class', ' display-3 col-4 col-md-4 mb-0  d-inline  bg-dark text-white ')
           }
 }
+
 
 function show_all_orders() {
   let xhr = new XHR();
